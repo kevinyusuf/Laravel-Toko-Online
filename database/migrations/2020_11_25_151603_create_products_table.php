@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('categoryId');
             $table->string('productImg');
             $table->string('productName')->unique();
-            $table->string('productCategory');
             $table->integer('productPrice');
             $table->longText('productDesc');
 
