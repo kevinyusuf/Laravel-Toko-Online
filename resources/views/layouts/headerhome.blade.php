@@ -16,9 +16,10 @@
         <div class="container-fluid"><button data-toggle="collapse" data-target="#" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"><a class="navbar-brand ml-auto" href="{{url('/')}}    "><img src="{{asset('img/logo.png')}}" alt=""></a>
                 <form class="form-inline ml-auto" target="_self">
-                    <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search"  placeholder="Search" style="width: 410px;"></div>
+                    <div class="form-group"><label for="search-field"></label><input class="form-control search-field" type="search" id="search-field" name="search" value="{{Request::input('search')}}"  placeholder="Search" style="width: 410px;"></div>
+                    </div><button class="btn btn-success text-white" type="submit" role="button" style="margin: 0px 20px;">Search</button>
                 </form>
-            </div><a class="btn btn-success text-white" role="button" style="margin: 0px 20px;">Search</a>
+            
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav text-right mx-auto">
                 @guest

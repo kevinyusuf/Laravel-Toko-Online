@@ -27,3 +27,4 @@ Auth::routes();
 // });
 
 Route::get('/', 'ProductController@allProduct');
+Route::get('/detail_product/{id}', 'ProductController@productDetail');
