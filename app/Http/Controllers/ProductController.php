@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,7 @@ class ProductController extends Controller
         $search = $req->input('search');
         $products = Product::where('productName', 'like', "%$search%")->paginate(3);
 
-        return view('welcome', compact('products'));
+        return view('homepage', compact('products'));
     }
     
     public function productDetail($id, Request $req){
@@ -31,14 +32,14 @@ class ProductController extends Controller
             return $this->search($req);
         }else{
             $products = Product::paginate(3);
-            return view('welcome', compact('products'));
+            return view('homepage', compact('products'));
         }
     }
     
-    // public function admin(){
-    //     $products = Product::all();
+    public function adminProduct(){
+        $products = DB::table('products')->join('categories','products.categoryId','=','categories.categoryId')->get();
 
-    //     return view('adm', compact('products'));
-    // }
+        return view('homeAdmin', compact('products'));
+    }
 
 }

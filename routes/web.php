@@ -27,4 +27,13 @@ Auth::routes();
 // });
 
 Route::get('/', 'ProductController@allProduct');
-Route::get('/detail_product/{id}', 'ProductController@productDetail');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/detail_product/{id}', 'ProductController@productDetail');
+
+    //middleware kedua nested karena untuk cek logged in user punya role admin atau tidak, kalau punya user bisa akses route /admin
+    Route::group(['middleware' => 2], function () {
+        Route::get('/adminPage','ProductController@adminProduct');
+    });
+});
