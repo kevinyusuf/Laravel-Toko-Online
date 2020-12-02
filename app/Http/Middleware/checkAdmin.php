@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdminLogin
+class checkAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,12 @@ class CheckAdminLogin
      */
     public function handle($request, Closure $next)
     {
-        $role = Auth::user()->roleId->pluck('roleId');
 
-        if(!$role->contains('1')){
-            return redirect('/noAccess');
+        if(Auth::user() && Auth::user()->roleId == 2){
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect('homepage')->with('error','You have not admin access');
+        
     }
 }
