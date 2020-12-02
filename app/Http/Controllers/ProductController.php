@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
     
     public function adminProduct(){
-        $products = DB::table('products')->join('categories','products.categoryId','=','categories.categoryId')->get();
+        $products = DB::table('products')->join('categories','products.categoryId','=','categories.id')->get();
 
         return view('homeAdmin', compact('products'));
     }

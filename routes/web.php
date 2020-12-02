@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail_product/{id}', 'ProductController@productDetail');
 
     //middleware kedua nested karena untuk cek logged in user punya role admin atau tidak, kalau punya user bisa akses route /admin
-    Route::group(['middleware' => 2], function () {
+    Route::group(['middleware' => ['admin']], function () {
         Route::get('/adminPage','ProductController@adminProduct');
     });
 });
