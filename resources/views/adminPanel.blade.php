@@ -12,7 +12,7 @@
                         </div>
                     @endif
 
-                   <div class="card-title">{{ __('You are logged in!') }}</div> 
+                   <div class="card-title">{{ __('ADMIN') }}</div> 
                 </div>
             </div>
         </div>
