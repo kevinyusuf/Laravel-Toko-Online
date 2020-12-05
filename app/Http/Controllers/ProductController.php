@@ -36,10 +36,22 @@ class ProductController extends Controller
         }
     }
     
-    public function adminProduct(){
-        $products = DB::table('products')->join('categories','products.categoryId','=','categories.id')->get();
 
-        return view('homeAdmin', compact('products'));
+    //admin
+    public function adminHome(){
+        return view('adminPanel');
+    }
+
+    public function listProduct(){
+        $products = DB::table('products')->join('categories','products.categoryId','=','categories.categoryId')->get();
+        
+        return view('adminListProduct', compact('products'));
+    }
+
+    public function deleteProduct($id){
+        DB::delete('delete from products where id = ?',[$id]);
+        
+        return back();
     }
 
 }

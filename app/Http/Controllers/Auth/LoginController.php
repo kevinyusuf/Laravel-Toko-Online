@@ -29,7 +29,7 @@ class LoginController extends Controller
 
     public function authenticated($request , $user){
         if($user->roleId==2){
-            return redirect('/adminPage');
+            return redirect('/adminPanel');
         }else if($user->roleId==1){
             return redirect('/welcome') ;
         }

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/register',function(){
 //     return view('register');
 // });
@@ -34,7 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail_product/{id}', 'ProductController@productDetail');
 
     //middleware kedua nested karena untuk cek logged in user punya role admin atau tidak, kalau punya user bisa akses route /admin
+    // Route::group(['middleware' => ['admin']], function () {
+    //     Route::get('/adminPage','ProductController@adminProduct');
+    // });
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('/adminPage','ProductController@adminProduct');
+        Route::get('/adminPanel','ProductController@adminHome');
+        Route::get('/adminListProduct','ProductController@listProduct');
+        Route::get('/adminListProduct/{id}','ProductController@listProduct');
     });
 });
