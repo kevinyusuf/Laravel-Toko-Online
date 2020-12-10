@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/register',function(){
 //     return view('register');
 // });
@@ -32,14 +32,18 @@ Route::get('/', 'ProductController@allProduct');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail_product/{id}', 'ProductController@productDetail');
+    Route::get('/homepage', 'HomeController@index')->name('home');
 
-    //middleware kedua nested karena untuk cek logged in user punya role admin atau tidak, kalau punya user bisa akses route /admin
-    // Route::group(['middleware' => ['admin']], function () {
-    //     Route::get('/adminPage','ProductController@adminProduct');
-    // });
-    Route::group(['middleware' => ['admin']], function () {
-        Route::get('/adminPanel','ProductController@adminHome');
-        Route::get('/adminListProduct','ProductController@listProduct');
-        Route::get('/adminListProduct/{id}','ProductController@listProduct');
-    });
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/adminPanel','ProductController@adminHome');
+    Route::get('/adminPanel/adminListProduct','ProductController@listProduct');
+    Route::get('/adminPanel/adminListProduct/{id}','ProductController@deleteProduct');
+    Route::get('/adminPanel/adminAddProduct','ProductController@indexAddProduct');
+    Route::post('/adminPanel/adminAddProduct/addProducts', 'ProductController@addProducts');
+    Route::get('/adminPanel/adminListCategory', 'ProductController@indexListCategory');
+    Route::get('/adminPanel/adminListCategory/{id}', 'ProductController@listProductByCategory');
+    Route::get('/adminPanel/adminAddCategory', 'ProductController@indexAddCategory');
+    Route::post('/adminPanel/adminAddCategory/addCategory', 'ProductController@addCategory');
 });

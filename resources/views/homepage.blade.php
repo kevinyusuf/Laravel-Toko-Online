@@ -17,6 +17,9 @@
                     @endforeach
                 </div>
                 
+                <div class="d-flex justify-content-center">
+                    {{$products->withQueryString()->links()}}
+                </div>
             </div>
 @endsection
 
