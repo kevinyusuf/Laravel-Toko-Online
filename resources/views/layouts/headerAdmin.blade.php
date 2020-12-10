@@ -30,10 +30,10 @@
                 @endif
                 @else
                 <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" style="color: #ffffff;opacity: 1;">Product</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Add Product</a><a class="dropdown-item" role="presentation" href="{{url('/adminListProduct')}}">List Product</a></div>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="{{url('/adminPanel/adminAddProduct')}}">Add Product</a><a class="dropdown-item" role="presentation" href="{{url('/adminPanel/adminListProduct')}}">List Product</a></div>
                     </li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" style="color: #ffffff;">Category&nbsp;</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Add Category</a><a class="dropdown-item" role="presentation" href="#">List Category</a></div>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="{{url('/adminPanel/adminAddCategory')}}">Add Category</a><a class="dropdown-item" role="presentation" href="{{url('/adminPanel/adminListCategory')}}">List Category</a></div>
                     </li>
                     <li class="nav-item dropdown mr-sm-2">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

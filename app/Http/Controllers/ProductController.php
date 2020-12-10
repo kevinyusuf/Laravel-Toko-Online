@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class ProductController extends Controller
 {
@@ -54,4 +56,76 @@ class ProductController extends Controller
         return back();
     }
 
+    public function indexAddProduct(){
+        $products = DB::table('products')->join('categories','products.categoryId','=','categories.categoryId')->get();
+        $categories = Category::all();
+
+        return view('adminAddProduct', compact('products','categories'));
+    }
+
+    public function addProducts(Request $request){
+        
+
+
+        $request->validate([
+            'productName' => 'required|unique:products,productName',
+            'category' => 'required',
+            'productDesc' => 'required',
+            'productPrice' => 'required|numeric|min:100',
+            'productImg' => 'required|image|max:10000',
+        ]);
+        
+        $productName = $request->input('productName');
+        $category = $request->input('category');
+        $productDesc = $request->input('productDesc');
+        $productPrice = $request->input('productPrice');
+        $image = $request->file('productImg')->getClientOriginalName();;
+        $destination = base_path() . '/public/img';
+        $request->file('productImg')->move($destination, $image);
+         
+                
+        DB::table('products')->insert(
+            ['categoryId' => $category, 
+            'productImg' => $image,
+            'productName' => $productName, 
+            'productPrice' => $productPrice, 
+            'productDesc'=> $productDesc
+            ]);
+
+        return redirect('/adminPanel/adminListProduct');
+    }
+
+    public function indexListCategory(){
+        $categories = Category::all();
+
+        return view('adminListCategory', compact('categories'));
+    }
+
+    public function listProductByCategory($id){
+        $products = Product::join('categories','products.categoryId','=','categories.categoryId')->where('products.categoryId',$id)->get();
+        $categories = Category::all();
+
+        return view('adminListCategory', compact('products','categories'));
+    }
+
+    public function indexAddCategory(){
+        $categories = Category::all();
+
+        return view('adminAddCategory', compact('categories'));
+    }
+
+    public function addCategory(Request $request){
+        $request->validate([
+            'categoryName' => 'required|unique:categories,categoryName'
+        ]);
+
+        $categoryName = $request->input('categoryName');
+
+        DB::table('categories')->insert([
+            'categoryName' => $categoryName
+        ]);
+
+        return redirect('/adminPanel/adminListCategory');
+    }
 }
+

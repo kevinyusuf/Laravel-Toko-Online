@@ -31,7 +31,7 @@ class LoginController extends Controller
         if($user->roleId==2){
             return redirect('/adminPanel');
         }else if($user->roleId==1){
-            return redirect('/welcome') ;
+            return redirect('/homepage') ;
         }
     }
 
