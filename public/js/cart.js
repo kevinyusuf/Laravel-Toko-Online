@@ -55,7 +55,6 @@ $(document).ready(function(){
 	});
 
 	$('.btn-delete').on('click', function() {
-		alert("btn delete")
 		var id 	= $(this).data("id"),
     		uri = $(this).data("uri");
 		if(id != ""){

@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/deletecart', 'TransactionController@deleteCart');
     Route::post('/checkout', 'TransactionController@transaction');
     Route::get('/history','TransactionController@historypage');
-    Route::get('/history/{id}','TransactionController@transaction_detail');
+    Route::get('/history/{id}','TransactionController@detailtransaction');
 });
 
 Route::group(['middleware' => ['admin']], function () {

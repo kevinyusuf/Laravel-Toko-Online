@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDO;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -14,9 +15,10 @@ class ProductController extends Controller
 
     private function search($req){
         $search = $req->input('search');
+        $countCart = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
         $products = Product::where('productName', 'like', "%$search%")->paginate(3);
 
-        return view('homepage', compact('products'));
+        return view('homepage', compact('products', 'countCart'));
     }
     
     public function productDetail($id, Request $req){
@@ -24,7 +26,8 @@ class ProductController extends Controller
             return $this->search($req);
         }else{
             $products = Product::where('id',$id)->first();
-            return view('detail_product', compact('products'));
+            $countCart = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
+            return view('detail_product', compact('products', 'countCart'));
         }
         
     }
@@ -33,8 +36,9 @@ class ProductController extends Controller
         if(count($req->all()) > 0){
             return $this->search($req);
         }else{
+            $countCart = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
             $products = Product::paginate(3);
-            return view('homepage', compact('products'));
+            return view('homepage', compact('products', 'countCart'));
         }
     }
     

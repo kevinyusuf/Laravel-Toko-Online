@@ -34,7 +34,15 @@
                 <li class="nav-item" role="presentation" style="margin-right: 5px;"><a
                             class="nav-link active d-lg-flex d-xl-flex align-items-lg-center justify-content-xl-center align-items-xl-center"
                             href="{{url('/cart')}}"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center"
-                                src="{{ asset('img/shopping-cart.png')}}" style="width: 30px;"></a>
+                                src="{{ asset('img/shopping-cart.png')}}" style="width: 30px;">
+                                <span class='badge badge-success' id='lblCartCount'> 
+                                    <?php if (isset($countCart)): ?>
+                                        {{$countCart}}
+                                    <?php else: ?>
+                                        0
+                                    <?php endif ?>
+                                </span>
+                            </a>
                     </li>
                     <li class="nav-item" role="presentation" style="margin-right: 5px;"><a
                             class="btn btn-success text-white"

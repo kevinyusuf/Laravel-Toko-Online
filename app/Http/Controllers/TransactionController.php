@@ -14,51 +14,13 @@ class TransactionController extends Controller
 {
     /** Cart **/
     public function cartpage(){//untuk mengarahkan ke page cart.blade.php
-    	$compact['carts'] = DB::table('carts')
+        $compact['countCart'] = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
+        $compact['carts'] = DB::table('carts')
         ->join('products', 'carts.productId', '=', 'products.id')
         ->where('userId', Auth::id())
         ->select('products.*', 'carts.productQTY', 'carts.id')
         ->paginate(12);
 		return view('cart', $compact);
-    }
-
-    // public function checkout(){
-
-    //     $transactionId = DB::table('transactions')->insertGetId([
-    //         'transactionDate' => date('Y-m-d H:i:s'),
-    //         'userId'            => Auth::id()
-    //     ]);
-
-    //     $products = DB::table('carts');
-
-    //     foreach($products as $i => $products){
-    //         $arr[] = [
-    //             'id' => $transactionId,
-    //             'productId' => $products->productId,
-    //             'productQTY' => $products->ProductQTY
-    //         ];
-    //     }
-
-    //     DB::table('detailTransaction')->insert($arr);
-
-    //     return back();
-    // }
-    
-    function historypage(){
-        $transactions = DB::table('transactions')->where('userId', Auth::id())->paginate(12);
-
-        return view('history',compact('transactions'));
-    }
-
-    function transaction_detail($id){
-
-        $products = DB::table('detailTransactions')
-        ->join('products','detailTransactions.productId','=','products.id')
-        ->join('transactions','detailTransactions.transactionId','=','transactions.id')
-        ->where('detailTransactions.transactionId',$id)
-        ->get();
-
-        return view('detail_history',compact('products'));
     }
 
 	public function addToCart(Request $request){
@@ -160,5 +122,23 @@ class TransactionController extends Controller
     	DB::delete('delete from carts where userId = ?', [ Auth::id()]);
 
     	return redirect('cart');
+    }
+
+    function historypage(){
+        $transactions = DB::table('transactions')->where('userId', Auth::id())->paginate(12);
+        $countCart = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
+        return view('history',compact('transactions', 'countCart'));
+    }
+
+    function detailtransaction ($id){
+
+        $products = DB::table('detailTransactions')
+        ->join('products','detailTransactions.productId','=','products.id')
+        ->join('transactions','detailTransactions.transactionId','=','transactions.id')
+        ->where('detailTransactions.transactionId',$id)
+        ->get();
+        $countCart = DB::table('carts')->where('userId', Auth::id())->sum('productQTY');
+
+        return view('detail_history',compact('products', 'countCart'));
     }
 }
