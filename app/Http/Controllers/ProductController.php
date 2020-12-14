@@ -64,8 +64,6 @@ class ProductController extends Controller
     }
 
     public function addProducts(Request $request){
-        
-
 
         $request->validate([
             'productName' => 'required|unique:products,productName',
@@ -79,7 +77,7 @@ class ProductController extends Controller
         $category = $request->input('category');
         $productDesc = $request->input('productDesc');
         $productPrice = $request->input('productPrice');
-        $image = $request->file('productImg')->getClientOriginalName();;
+        $image = $request->file('productImg')->getClientOriginalName();
         $destination = base_path() . '/public/img';
         $request->file('productImg')->move($destination, $image);
          

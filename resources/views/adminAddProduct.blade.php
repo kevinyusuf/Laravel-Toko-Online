@@ -25,7 +25,7 @@
                     <h6 class="text-center">Description</h6><input class="form-control" type="text" name="productDesc" placeholder="Description">
                 </div>
                 <div class="form-group">
-                    <h6 class="text-center">Price</h6><input class="form-control" type="text"  name="productPrice" placeholder="Price">
+                    <h6 class="text-center">Price</h6><input class="form-control" type="number"  name="productPrice" placeholder="Price">
                 </div>
                 <div class="form-group">
                     <h6 class="text-center">Choose File</h6><input type="file" name="productImg" accept="img/*" style="width: 260px;">
