@@ -32,5 +32,7 @@
         </nav>
         @yield('content');
     </div>
+
+    <script src="{{ asset('js/cart.js') }}" defer></script>
 </body>
 </html>

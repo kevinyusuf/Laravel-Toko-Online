@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
@@ -32,12 +33,12 @@
                 @else
                 <li class="nav-item" role="presentation" style="margin-right: 5px;"><a
                             class="nav-link active d-lg-flex d-xl-flex align-items-lg-center justify-content-xl-center align-items-xl-center"
-                            href="#"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center"
+                            href="{{url('/cart')}}"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center"
                                 src="{{ asset('img/shopping-cart.png')}}" style="width: 30px;"></a>
                     </li>
                     <li class="nav-item" role="presentation" style="margin-right: 5px;"><a
                             class="btn btn-success text-white"
-                            href="#" role="button">History</a>
+                            href="{{url('/history')}}" role="button">History</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -65,5 +66,8 @@
     </nav>
         @yield('content')
     </div>
+
+    <script type="text/javascript">var pathImg = "{{ asset('img') }}";</script>
+    <script src="{{ asset('js/cart.js') }}" defer></script>
 </body>
 </html>

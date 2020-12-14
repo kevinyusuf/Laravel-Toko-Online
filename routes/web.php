@@ -33,7 +33,14 @@ Route::get('/', 'ProductController@allProduct');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail_product/{id}', 'ProductController@productDetail');
     Route::get('/homepage', 'HomeController@index')->name('home');
-
+    Route::post('/addtocart', 'TransactionController@addToCart');
+    Route::get('/cart', 'TransactionController@cartpage');
+    Route::post('/getedit', 'TransactionController@getEdit');
+    Route::post('/updatecart', 'TransactionController@updateCart');
+    Route::post('/deletecart', 'TransactionController@deleteCart');
+    Route::post('/checkout', 'TransactionController@transaction');
+    Route::get('/history','TransactionController@historypage');
+    Route::get('/history/{id}','TransactionController@transaction_detail');
 });
 
 Route::group(['middleware' => ['admin']], function () {
