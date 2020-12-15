@@ -42,7 +42,7 @@ $(document).ready(function(){
 		          	alert("Error occured ! " + data.msg);			
 		          }
 		          else{
-		          	alert("Berhasil update!");	
+		          	alert("Berhasil update product!");	
 					window.location = "/cart";	
 		          }
 		          
@@ -71,7 +71,7 @@ $(document).ready(function(){
 		          	alert("Error occured ! " + data.msg);			
 		          }
 		          else{
-		          	alert("Berhasil hapus cart!");	
+		          	alert("Berhasil hapus product!");	
 					window.location = "/cart";	
 		          }
 		          
