@@ -1,7 +1,7 @@
 @extends('layouts.headerhome')
 @section('content')
 <div>
-    <h2 class="display-4 text-center text-success border rounded-0" style=" font-size: 30px; margin-top: 30px; margin-bottom: 50px;">Transaction History</h2>
+    <h2 class="display-4 text-center text-success border rounded-0" style=" font-size: 30px; margin-top: 30px; margin-bottom: 50px;">Detail Transaction History</h2>
 </div>
 @foreach($products as $p)
     @php
